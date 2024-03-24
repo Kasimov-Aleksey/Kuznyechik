@@ -156,7 +156,7 @@ def kuznyechik_encrypt(x, k):
     return x ^ keys[-1]  # Выполняем последний XOR с ключом
 
 
-# Дешифрование
+# Расшифрование
 def kuznyechik_decrypt(x, k):
     keys = kuznyechik_key_schedule(k)
     keys.reverse()
