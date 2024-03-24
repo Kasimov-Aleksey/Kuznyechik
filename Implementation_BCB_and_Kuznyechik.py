@@ -1,12 +1,4 @@
-def kuznyechik_encrypt(plaintext, key):
-    # Предположим, что это реализация шифра Кузнечик
-    # Это просто заглушка для демонстрационных целей
-    return plaintext + b'_encrypted'
-
-def kuznyechik_decrypt(ciphertext, key):
-    # Предположим, что это реализация шифра Кузнечик
-    # Это просто заглушка для демонстрационных целей
-    return ciphertext.replace(b'_encrypted', b'')
+from Kuznyechik_Block_Cipher import kuznyechik_encrypt, kuznyechik_decrypt
 
 def xor_bytes(a, b):
     # Функция для выполнения операции XOR над двумя байтовыми строками
@@ -26,17 +18,6 @@ def unpad_message(padded_message):
     padding_length = padded_message[-1]
     return padded_message[:-padding_length]
 
-def encrypt_block(block, key):
-    # Шифрование одного блока данных с использованием ключа
-    result = b''
-    for i in range(min(len(block), len(key))):
-        result += bytes([block[i] ^ key[i]])
-    return result
-
-def decrypt_block(block, key):
-    # Дешифрование одного блока данных с использованием ключа
-    return encrypt_block(block, key)
-
 def encrypt_cbc(input_file, output_file, key, iv):
     # Шифрование текста из файла в режиме input_file
     block_size = len(key)
@@ -48,7 +29,7 @@ def encrypt_cbc(input_file, output_file, key, iv):
     for i in range(0, len(plaintext), block_size):
         block = plaintext[i:i+block_size]
         block = xor_bytes(block, previous_block)
-        encrypted_block = encrypt_block(block, key)
+        encrypted_block = int.to_bytes(kuznyechik_encrypt(int.from_bytes(block, byteorder='big'), int.from_bytes(key, byteorder='big')), 16, byteorder='big')
         ciphertext += encrypted_block
         previous_block = encrypted_block
     with open(output_file, 'wb') as file:
@@ -63,7 +44,7 @@ def decrypt_cbc(input_file, output_file, key, iv):
     previous_block = iv
     for i in range(0, len(ciphertext), block_size):
         block = ciphertext[i:i+block_size]
-        decrypted_block = decrypt_block(block, key)
+        decrypted_block = int.to_bytes(kuznyechik_decrypt(int.from_bytes(block, byteorder='big'), int.from_bytes(key, byteorder='big')), 16, byteorder='big')
         decrypted_block = xor_bytes(decrypted_block, previous_block)
         plaintext += decrypted_block
         previous_block = block

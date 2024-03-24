@@ -181,21 +181,3 @@ def write_output(file_name, PT, CT, DT, result):
         file.write("Зашифрованный текст (CT): {}\n".format(hex(CT)))
         file.write("Расшифрованный текст (DT): {}\n".format(hex(DT)))
         file.write(result)
-
-
-# Получение входных данных из файла
-input_file = 'input.txt'
-PT, k = read_input(input_file)
-
-# Шифрование
-CT = kuznyechik_encrypt(PT, k)
-
-# Расшифрование
-DT = kuznyechik_decrypt(CT, k)
-
-# Проверка расшифрованного текста с оригинальным
-result = "Расшифрованный текст совпадает с оригинальным: {}".format(DT == PT)
-
-# Запись результата в файл
-output_file = 'output.txt'
-write_output(output_file, PT, CT, DT, result)
