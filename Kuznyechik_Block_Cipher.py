@@ -175,9 +175,12 @@ def read_input(file_name):
 
 
 # Запись результата в файл
-def write_output(file_name, data):
+def write_output(file_name, PT, CT, DT, result):
     with open(file_name, 'w') as file:
-        file.write(data)
+        file.write("Исходный текст (PT): {}\n".format(hex(PT)))
+        file.write("Зашифрованный текст (CT): {}\n".format(hex(CT)))
+        file.write("Расшифрованный текст (DT): {}\n".format(hex(DT)))
+        file.write(result)
 
 
 # Получение входных данных из файла
@@ -195,4 +198,4 @@ result = "Расшифрованный текст совпадает с ориг
 
 # Запись результата в файл
 output_file = 'output.txt'
-write_output(output_file, result)
+write_output(output_file, PT, CT, DT, result)
