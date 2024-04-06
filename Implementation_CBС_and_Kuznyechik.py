@@ -57,7 +57,7 @@ key_cbc = b'0123456789abcdef'  # 16-байтовый ключ
 iv_cbc = b'1234567890abcdef'    # Вектор инициализации
 
 # Зашифровать текст из input_data.txt и записать результат в encrypted.txt
-encrypt_cbc('input.txt', 'encrypted_BCB.txt', key_cbc, iv_cbc)
+encrypt_cbc('input.txt', 'encrypted_CBС.txt', key_cbc, iv_cbc)
 
 # Расшифровать текст из encrypted.txt и записать результат в decrypted.txt
-decrypt_cbc('encrypted_BCB.txt', 'decrypted_BCB.txt', key_cbc, iv_cbc)
+decrypt_cbc('encrypted_CBС.txt', 'decrypted_CBС.txt', key_cbc, iv_cbc)
